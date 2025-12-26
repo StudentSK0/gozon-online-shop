@@ -1,0 +1,14 @@
+**/bin/
+**/obj/
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.cache
+*.log
+*.db
+.env
+node_modules/
+payments_db/
+orders_db/

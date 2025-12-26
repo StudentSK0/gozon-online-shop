@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gozón Store Console</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+
+  <main class="shell">
+    <header class="hero">
+      <div class="hero-text">
+        <p class="kicker">Gozón Ops</p>
+        <h1>Панель заказов и оплат</h1>
+        <p class="subtitle">Минимальный, но дружелюбный фронтенд для проверки счетов, пополнений и заказов.</p>
+        <div class="hero-tags">
+          <span class="pill">RabbitMQ</span>
+          <span class="pill">PostgreSQL</span>
+          <span class="pill">Outbox/Inbox</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <label for="userId">User ID</label>
+        <input id="userId" type="text" placeholder="например: user-1" />
+        <div class="hero-actions">
+          <button id="saveUserId">Сохранить</button>
+          <button id="clearUserId" class="ghost">Сбросить</button>
+        </div>
+        <p class="hint">User ID используется для заголовка X-User-Id во всех запросах.</p>
+        <div class="session-line">
+          <span class="session-label">Сессия</span>
+          <span id="sessionStatus" class="status-pill">не задана</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Payments</h2>
+          <span id="paymentsStatus" class="status-pill">idle</span>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Текущий баланс</div>
+          <div id="balanceValue" class="metric-value">—</div>
+          <div id="balanceMeta" class="metric-meta">нет данных</div>
+        </div>
+        <div class="actions">
+          <button id="createAccount">Создать счет</button>
+          <div class="inline">
+            <input id="topupAmount" type="number" min="1" placeholder="Сумма пополнения" />
+            <button id="topup">Пополнить</button>
+          </div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Последний ответ Payments</div>
+          <pre id="paymentsOutput" class="output"></pre>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Orders</h2>
+          <span id="ordersStatus" class="status-pill">idle</span>
+        </div>
+        <div class="order-highlight">
+          <div>
+            <div class="metric-label">Последний заказ</div>
+            <div id="lastOrderId" class="order-id">—</div>
+          </div>
+          <span id="lastOrderStatus" class="badge">нет данных</span>
+        </div>
+        <div class="actions">
+          <div class="inline">
+            <input id="orderDescription" type="text" placeholder="Описание заказа" />
+            <input id="orderAmount" type="number" min="1" placeholder="Сумма заказа" />
+            <button id="createOrder">Создать заказ</button>
+          </div>
+          <div class="inline">
+            <input id="orderId" type="text" placeholder="Order ID" />
+            <button id="getOrder">Показать статус</button>
+          </div>
+        </div>
+        <div class="orders-list">
+          <div class="result-title">Последние заказы</div>
+          <div class="table-wrap">
+            <table class="orders-table">
+              <thead>
+                <tr>
+                  <th>Описание</th>
+                  <th>Сумма</th>
+                  <th>Статус</th>
+                  <th>ID</th>
+                  <th>Создан</th>
+                </tr>
+              </thead>
+              <tbody id="ordersList"></tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span id="pageSummary" class="page-summary">Показаны 0 из 0</span>
+            <div class="pagination">
+              <button id="prevPage" class="ghost">Назад</button>
+              <span id="pageInfo" class="page-info">Страница 1 из 1</span>
+              <button id="nextPage" class="ghost">Вперёд</button>
+            </div>
+          </div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Последний ответ Orders</div>
+          <pre id="ordersOutput" class="output"></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

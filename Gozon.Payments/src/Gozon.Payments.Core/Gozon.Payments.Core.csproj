@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Gozon.Payments.Core</RootNamespace>
+    <AssemblyName>Gozon.Payments.Core</AssemblyName>
+  </PropertyGroup>
+</Project>

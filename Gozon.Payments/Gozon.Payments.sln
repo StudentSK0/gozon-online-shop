@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{71BE1DE4-C87B-4DC0-8AB3-D32A8D460BAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gozon.Payments.Api", "src\Gozon.Payments.Api\Gozon.Payments.Api.csproj", "{48E7A4DD-4B1B-4186-B6B8-B4931150C9BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gozon.Payments.Core", "src\Gozon.Payments.Core\Gozon.Payments.Core.csproj", "{BD6EFC26-DEF2-4C2C-AD7E-5F6A09D04386}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gozon.Payments.Infrastructure", "src\Gozon.Payments.Infrastructure\Gozon.Payments.Infrastructure.csproj", "{9DB86684-2E56-458A-B8D2-128820258979}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48E7A4DD-4B1B-4186-B6B8-B4931150C9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48E7A4DD-4B1B-4186-B6B8-B4931150C9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48E7A4DD-4B1B-4186-B6B8-B4931150C9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48E7A4DD-4B1B-4186-B6B8-B4931150C9BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD6EFC26-DEF2-4C2C-AD7E-5F6A09D04386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD6EFC26-DEF2-4C2C-AD7E-5F6A09D04386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD6EFC26-DEF2-4C2C-AD7E-5F6A09D04386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD6EFC26-DEF2-4C2C-AD7E-5F6A09D04386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB86684-2E56-458A-B8D2-128820258979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB86684-2E56-458A-B8D2-128820258979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB86684-2E56-458A-B8D2-128820258979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB86684-2E56-458A-B8D2-128820258979}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{48E7A4DD-4B1B-4186-B6B8-B4931150C9BF} = {71BE1DE4-C87B-4DC0-8AB3-D32A8D460BAB}
+		{BD6EFC26-DEF2-4C2C-AD7E-5F6A09D04386} = {71BE1DE4-C87B-4DC0-8AB3-D32A8D460BAB}
+		{9DB86684-2E56-458A-B8D2-128820258979} = {71BE1DE4-C87B-4DC0-8AB3-D32A8D460BAB}
+	EndGlobalSection
+EndGlobal

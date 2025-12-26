@@ -1,0 +1,116 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD-SHELL", "rabbitmq-diagnostics -q ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  payments-db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: gozon_payments
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - payments_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d gozon_payments"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  orders-db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: gozon_orders
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - orders_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d gozon_orders"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  payments-api:
+    build:
+      context: ./Gozon.Payments
+      args:
+        HTTP_PROXY: ${HTTP_PROXY:-}
+        HTTPS_PROXY: ${HTTPS_PROXY:-}
+        NO_PROXY: ${NO_PROXY:-}
+    environment:
+      Database__ConnectionString: Host=payments-db;Port=5432;Database=gozon_payments;Username=postgres;Password=postgres
+      RabbitMq__HostName: rabbitmq
+      RabbitMq__UserName: guest
+      RabbitMq__Password: guest
+      RabbitMq__PaymentsRequestQueue: payments.requests
+      RabbitMq__PaymentsResultQueue: payments.results
+    depends_on:
+      payments-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+
+  orders-api:
+    build:
+      context: ./Gozon.Orders
+      args:
+        HTTP_PROXY: ${HTTP_PROXY:-}
+        HTTPS_PROXY: ${HTTPS_PROXY:-}
+        NO_PROXY: ${NO_PROXY:-}
+    environment:
+      Database__ConnectionString: Host=orders-db;Port=5432;Database=gozon_orders;Username=postgres;Password=postgres
+      RabbitMq__HostName: rabbitmq
+      RabbitMq__UserName: guest
+      RabbitMq__Password: guest
+      RabbitMq__PaymentsRequestQueue: payments.requests
+      RabbitMq__PaymentsResultQueue: payments.results
+    depends_on:
+      orders-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    ports:
+      - "8082:8082"
+    restart: unless-stopped
+
+  gateway:
+    build:
+      context: ./Gozon.Gateway
+      args:
+        HTTP_PROXY: ${HTTP_PROXY:-}
+        HTTPS_PROXY: ${HTTPS_PROXY:-}
+        NO_PROXY: ${NO_PROXY:-}
+    depends_on:
+      - payments-api
+      - orders-api
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    depends_on:
+      - gateway
+    ports:
+      - "8088:80"
+    restart: unless-stopped
+
+volumes:
+  payments_db:
+  orders_db:

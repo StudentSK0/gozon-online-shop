@@ -1,0 +1,114 @@
+{
+  "info": {
+    "name": "Gozon Microservices",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Account",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-User-Id", "value": "user-1" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/payments/api/accounts",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["payments", "api", "accounts"]
+        }
+      }
+    },
+    {
+      "name": "Top Up",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-User-Id", "value": "user-1" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 1500\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/payments/api/accounts/topup",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["payments", "api", "accounts", "topup"]
+        }
+      }
+    },
+    {
+      "name": "Get Balance",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-User-Id", "value": "user-1" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/payments/api/accounts/balance",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["payments", "api", "accounts", "balance"]
+        }
+      }
+    },
+    {
+      "name": "Create Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-User-Id", "value": "user-1" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 600,\n  \"description\": \"Подарочный набор\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/orders/api/orders",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["orders", "api", "orders"]
+        }
+      }
+    },
+    {
+      "name": "List Orders",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-User-Id", "value": "user-1" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/orders/api/orders",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["orders", "api", "orders"]
+        }
+      }
+    },
+    {
+      "name": "Get Order",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-User-Id", "value": "user-1" }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/orders/api/orders/{{orderId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["orders", "api", "orders", "{{orderId}}"]
+        }
+      }
+    }
+  ]
+}
