@@ -29,21 +29,6 @@
 | PostgreSQL | Хранилище для Orders и Payments |
 
 
-## Архитектура и сценарий оплаты
-
-```mermaid
-flowchart LR
-    U[User] -->|POST /orders/api/orders| G[API Gateway]
-    G --> O[Orders Service]
-    O -->|order + outbox| ODB[(Orders DB)]
-    O -->|PaymentRequested| MQ[(RabbitMQ)]
-    MQ --> P[Payments Service]
-    P -->|inbox + debit| PDB[(Payments DB)]
-    P -->|PaymentResult| MQ
-    MQ --> O
-    O -->|update status| ODB
-```
-
 ## Запуск проекта
 
 ```bash
