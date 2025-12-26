@@ -32,7 +32,7 @@
 ## Запуск проекта
 
 ```bash
-cd Gozon
+cd gozon-online-shop
 docker compose up -d --build
 ```
 
