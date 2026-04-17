@@ -113,7 +113,6 @@ curl -X POST http://localhost:8080/orders/api/orders \
 curl http://localhost:8080/orders/api/orders/{orderId} -H "X-User-Id: user-1"
 ```
 
-Важно: для всех запросов требуется `X-User-Id` (или `user_id` в query string).
 
 ## WebSocket уведомления
 
