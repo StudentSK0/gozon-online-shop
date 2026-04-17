@@ -88,7 +88,7 @@ Swagger включен всегда и отображает XML-коммента
 - Orders: `http://localhost:8082/swagger`
 - Через gateway: `http://localhost:8080/payments/swagger`, `http://localhost:8080/orders/swagger`
 
-### Примеры запросов (через Gateway)
+#### Примеры запросов (через Gateway)
 Создать счет:
 ```bash
 curl -X POST http://localhost:8080/payments/api/accounts -H "X-User-Id: user-1"
